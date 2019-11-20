@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { NoteContext, defaultNote } from './NoteContext'
 import {Route, Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import NoteListNav from '../NoteListNav/NoteListNav';
@@ -82,7 +83,7 @@ class App extends Component {
                     render={routeProps => {
                         const {noteId} = routeProps.match.params;
                         const note = findNote(notes, noteId);
-                        return <NotePageMain {...routeProps} note={note} />;
+                        return <NoteContext.Provider value={note||defaultNote}><NotePageMain {...routeProps} /></NoteContext.Provider>;
                     }}
                 />
             </>

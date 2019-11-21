@@ -7,7 +7,7 @@ import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
 import dummyStore from '../dummy-store';
-import {getNotesForFolder, findNote, findFolder} from '../notes-helpers';
+import {getNotesForFolder, findNote, findFolder, countNotesForFolder} from '../notes-helpers';
 import './App.css';
 
 class App extends Component {
@@ -17,7 +17,8 @@ class App extends Component {
         findNote: (id)=> findNote(this.state.notes, id),
         findFolder: (id)=> findFolder(this.state.folders, id),
         getNotesForFolder: (id)=> getNotesForFolder(this.state.notes,id),
-        handleDeleteNote: (id) => this.handleDeleteNote(id)
+        handleDeleteNote: (id) => this.handleDeleteNote(id),
+        countNotesForFolder: (id)=>countNotesForFolder(this.state.notes, id)
     };
 
     componentDidMount() {
@@ -63,8 +64,6 @@ class App extends Component {
                         path={path}
                         render={routeProps => (
                             <NoteListNav
-                                folders={folders}
-                                notes={notes}
                                 {...routeProps}
                             />
                         )}

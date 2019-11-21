@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Note.css'
+import { NoteContext } from '../App/NoteContext'
 
-export default function Note(props) {
+export default class Note extends React.Component{
+  render(){
   return (
     <div className='Note'>
       <h2 className='Note__title'>
-        <Link to={`/note/${props.id}`}>
-          {props.name}
+        <Link to={`/note/${this.props.id}`}>
+          {this.props.name}
         </Link>
       </h2>
-      <button className='Note__delete' type='button'>
+      <button className='Note__delete' type='button' onClick={()=>this.context.handleDeleteNote(this.props.id)}>
         <FontAwesomeIcon icon='trash-alt' />
         {' '}
         remove
@@ -22,10 +24,11 @@ export default function Note(props) {
           Modified
           {' '}
           <span className='Date'>
-            {format(props.modified, 'Do MMM YYYY')}
+            {format(this.props.modified, 'Do MMM YYYY')}
           </span>
         </div>
       </div>
     </div>
   )
-}
+}}
+Note.contextType=NoteContext

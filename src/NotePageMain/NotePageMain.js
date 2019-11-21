@@ -1,11 +1,12 @@
 import React from 'react'
 import Note from '../Note/Note'
 import './NotePageMain.css'
-import { NoteContext } from '../App/NoteContext'
+import { NoteContext, defaultNote } from '../App/NoteContext'
 
 export default class NotePageMain extends React.Component{
   render(){
-    let note = this.context ;
+    let noteId = this.props.match.params.noteId
+    let note = this.context.findNote(noteId) || defaultNote
   return (
     <section className='NotePageMain'>
       <Note
